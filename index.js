@@ -1,10 +1,10 @@
-var Path = import('path')
+const path = require('path')
 
-function isLoaded(filename, tag, attr) {
-    var tags = document.getElementsByTagName(tag);
+function isResourceLoaded(filePath, targetTag, attr) {
+    var tags = document.getElementsByTagName(targetTag);
     for(var i =0; i < tags.length; i++) {
         var tag = tags[i];
-        if(tag.getAttribute(attr) == filename) {
+        if(tag.getAttribute(attr) == filePath) {
             return true;
         }
     }
@@ -12,7 +12,7 @@ function isLoaded(filename, tag, attr) {
 }
 
 function loadCss(filePath) {
-    if(isLoaded(filePath, 'link', 'href')) {
+    if(isResourceLoaded(filePath, 'link', 'href')) {
         return;
     }
     var fileref=document.createElement("link");
@@ -23,7 +23,7 @@ function loadCss(filePath) {
 };
 
 function loadScript(filePath, onloadEvent) {
-    if(isLoaded(filePath, 'script', 'src')) {
+    if(isResourceLoaded(filePath, 'script', 'src')) {
         onloadEvent();
         return;
     }
@@ -34,29 +34,37 @@ function loadScript(filePath, onloadEvent) {
     document.body.appendChild(fileref);
 };
 
-function load(filePath, onloadEvent) {
-    switch(Path.extenstion(filePath)) {
-        case 'css':
+const load = function(filePath, onloadEvent) {
+    if(typeof(document) === 'undefined') {
+        console.log('document not defined');
+        return;
+    }
+    switch(path.extname(filePath)) {
+        case '.css':
             loadCss(filePath);
             exit;
-        case 'js':
+        case '.js':
             loadScript(filePath, onloadEvent);
             exit;
     }
 }
 
-function isLoaded(filePath) {
-    switch(Path.extenstion(filePath)) {
-        case 'css':
+const isLoaded = function(filePath) {
+    if(typeof(document) === 'undefined') {
+         console.log('document not defined');
+         return;
+    }
+    switch(path.extname(filePath)) {
+        case '.css':
             isCssLoaded(filePath);
             exit;
-        case 'js':
+        case '.js':
             isScriptLoaded(filePath);
             exit;
     }
 }
 
 module.exports = {
-    load: load,
-    isLoaded: isLoaded
-};
+    load,
+    isLoaded
+}
