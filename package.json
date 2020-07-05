@@ -1,7 +1,21 @@
 {
   "name": "load-resource",
+  "description": "Adds link and script tags to Dom",
   "version": "1.0.0",
+  "repository": "git@github.com:bobscott45/load-resource.git",
+  "license": "MIT",
   "dependencies": {
     "path": "^0.12.7"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "jsdom": "^16.2.2",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^8.0.1",
+    "sinon": "^9.0.2",
+    "test-console": "^1.1.0"
   }
 }

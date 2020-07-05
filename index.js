@@ -11,28 +11,30 @@ function isResourceLoaded(filePath, targetTag, attr) {
     return false;
 }
 
-function loadCss(filePath) {
+function loadCss(filePath, onloadEvent) {
+
     if(isResourceLoaded(filePath, 'link', 'href')) {
         return;
     }
-    var fileref=document.createElement("link");
-    fileref.rel="stylesheet";
-    fileref.type="text/css";
-    fileref.href=filePath;
-    document.getElementsByTagName("head")[0].appendChild(fileref);
-};
+    var element=document.createElement("link");
+    element.rel="stylesheet";
+    element.type="text/css";
+    element.href=filePath;
+    element.onload=onloadEvent;
+    document.head.appendChild(element);
+}
 
 function loadScript(filePath, onloadEvent) {
     if(isResourceLoaded(filePath, 'script', 'src')) {
         onloadEvent();
         return;
     }
-    var fileref=document.createElement("script");
-    fileref.type="application/javascript";
-    fileref.src=filePath;
-    fileref.onload=onloadEvent
-    document.body.appendChild(fileref);
-};
+    var element=document.createElement("script");
+    element.type="application/javascript";
+    element.src=filePath;
+    element.onload=onloadEvent
+    document.body.appendChild(element);
+}
 
 const load = function(filePath, onloadEvent) {
     if(typeof(document) === 'undefined') {
@@ -42,10 +44,10 @@ const load = function(filePath, onloadEvent) {
     switch(path.extname(filePath)) {
         case '.css':
             loadCss(filePath);
-            exit;
+            break;
         case '.js':
             loadScript(filePath, onloadEvent);
-            exit;
+            break;
     }
 }
 
@@ -56,11 +58,11 @@ const isLoaded = function(filePath) {
     }
     switch(path.extname(filePath)) {
         case '.css':
-            isCssLoaded(filePath);
-            exit;
+            return isResourceLoaded(filePath, 'link', 'href');
+            break;
         case '.js':
-            isScriptLoaded(filePath);
-            exit;
+            return isResourceLoaded(filePath, 'script', 'src');
+            break;
     }
 }
 
