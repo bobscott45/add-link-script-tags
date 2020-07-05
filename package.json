@@ -1,8 +1,9 @@
 {
-  "name": "load-resource",
+  "name": "load-js-css",
   "description": "Adds link and script tags to Dom",
   "version": "1.0.0",
-  "repository": "git@github.com:bobscott45/load-resource.git",
+  "author": "Robert Scott",
+  "repository": "git@github.com:bobscott45/load-js-css.git",
   "license": "MIT",
   "dependencies": {
     "path": "^0.12.7"
