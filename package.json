@@ -1,5 +1,5 @@
 {
-  "name": "load-js-css",
+  "name": "add-link-script-tags",
   "description": "Adds link and script tags to Dom",
   "version": "1.0.0",
   "author": "Robert Scott",
