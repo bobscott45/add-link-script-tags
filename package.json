@@ -1,7 +1,7 @@
 {
   "name": "add-link-script-tags",
   "description": "Adds link and script tags to Dom",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "author": "Robert Scott",
   "repository": "git@github.com:bobscott45/load-js-css.git",
